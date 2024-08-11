@@ -1,4 +1,5 @@
 import requests
+import time
 from bs4 import BeautifulSoup
 
 def ask_gpt(news_url, openai_api_key):
@@ -70,7 +71,7 @@ def ask_gpt(news_url, openai_api_key):
         response.raise_for_status()
         response_data = response.json()
         chatgpt_message = response_data['choices'][0]['message']['content']
-
+        time.sleep(20)
         if "Cet article n'est pas suffisamment intéressant pour être publié" in chatgpt_message:
             print("La nouvelle n'est pas jugée intéressante pour être publiée.")
             return None
