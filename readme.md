@@ -58,25 +58,25 @@ Before using this project, ensure that the following are installed and configure
    r_emailaddress: To read the user's email address (if needed).
    w_member_social: To post content on behalf of the user.
 
-***Usage***
+## Usage
    Run the Script:
 
    Once everything is configured, you can run the main script:
    ```python main.py```
    This will open a browser window for you to authorize access to your LinkedIn account.
 
-***Configure RSS Feeds:***
+## Configure RSS Feeds:
 
    RSS feeds are configured in the script as a list of dictionaries. You can modify the FLUX variable in the script to add or remove feeds according to your needs.
 
-***Generation and Posting:***
+## Generation and Posting:
 
    The script retrieves articles from the configured RSS feeds.
    It uses the OpenAI API to generate a summary of each article in French.
    The generated summary is then automatically posted on LinkedIn.
    The original article is posted on Discord via a webhook.
 
-***Troubleshooting***
+## Troubleshooting
    LinkedIn Permission Errors
    If you encounter LinkedIn permission errors such as ACCESS_DENIED or Not enough permissions to access,    ensure that:
 
@@ -86,10 +86,10 @@ Before using this project, ensure that the following are installed and configure
    Environment Variables: Ensure that your .env file is correctly configured with valid API keys and secrets.
    Dependencies: Make sure all the required Python libraries are installed and up to date by running pip    install -r requirements.txt.
 
-***Common Errors***
+## Common Errors
 
   403 Forbidden: This usually indicates insufficient permissions. Double-check your LinkedIn application   settings and ensure that the user has granted the necessary permissions.
   Connection Errors: If the script fails to connect to LinkedIn or Discord, check your internet connection and ensure the URLs are correct in the .env file.
 
-***Contributing***
+## Contributing
   Contributions are welcome! If you'd like to improve this project, feel free to fork the repository and   submit a pull request. Please ensure your contributions adhere to the coding standards used in this project.
