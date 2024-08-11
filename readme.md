@@ -33,13 +33,15 @@ Before using this project, ensure that the following are installed and configure
 
 2. **Create a .env File:**
    Create a .env file in the root directory to store your API keys and other environment variables:
+   ```
    WEBHOOK_URL=https://discord.com/api/webhooks/xxx
    OPENAI_API_KEY=xxxxxxx
    LINKEDIN_CLIENT_ID=xxxxxxx
    LINKEDIN_CLIENT_SECRET=xxxxxxx
    REDIRECT_URI=http://localhost:8080
    ORG_NAME=xxxxxxx
-
+    ```
+    
 3. **Install Python Dependencies:**
    Use pip to install the necessary dependencies:
    ```
