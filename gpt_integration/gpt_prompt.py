@@ -49,7 +49,6 @@ def ask_gpt(news_url, openai_api_key):
                 "Communication : Informez immédiatement vos équipes IT et de sécurité pour qu’elles prennent les mesures nécessaires."
                 "C'est un rappel brutal de l'importance de maintenir une vigilance constante en matière de sécurité. Nous devons rester proactifs pour protéger nos systèmes contre de telles menaces."
 
-#cybersécurité #log4j #cybersecurity #vulnérabilité #infosec #sécuritéinformatique"
             )
         },
         {
