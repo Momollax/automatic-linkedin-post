@@ -1,18 +1,41 @@
 import requests
-import time
 from bs4 import BeautifulSoup
+import time
 
-def ask_gpt(news_url, openai_api_key):
-    response = requests.get(news_url)
-    if response.status_code == 200:
+def get_data(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Gère les erreurs HTTP
+
         soup = BeautifulSoup(response.content, 'html.parser')
-        for script in soup(["script", "style"]):
-            script.decompose()
+
+        # Supprime les balises qui ne sont pas pertinentes pour l'extraction de texte
+        for element in soup(["script", "style", "meta", "head", "title", "link", "noscript"]):
+            element.decompose()
+
+        # Extraire le texte visible
         visible_text = soup.get_text(separator='\n', strip=True)
-    else:
-        print(f"Erreur lors de la requête GET : {response.status_code}")
+
+        # Filtrer les lignes vides et très courtes
+        filtered_text = '\n'.join([line for line in visible_text.splitlines() if len(line.strip()) > 30])
+
+        text_length = len(filtered_text)
+        print(f"Longueur du texte filtré : {text_length} caractères")
+
+        if text_length > 40000:
+            print("Le texte est trop long pour être traité (plus de 40 000 caractères).")
+            return None
+        
+        return filtered_text
+
+    except requests.exceptions.RequestException as e:
+        print(f"Erreur lors de la requête GET : {e}")
         return None
 
+def ask_gpt(news_url, openai_api_key):
+    visible_text = get_data(news_url)
+    if visible_text == None:
+        return None
     url = 'https://api.openai.com/v1/chat/completions'
     headers = {
         'Authorization': f'Bearer {openai_api_key}',
@@ -62,7 +85,7 @@ def ask_gpt(news_url, openai_api_key):
     ]
 
     payload = {
-        "model": "gpt-4",
+        "model": "gpt-4o-mini",
         "messages": messages
     }
 

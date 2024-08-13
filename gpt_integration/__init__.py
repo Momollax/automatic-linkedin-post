@@ -8,10 +8,11 @@ def ask_gpt(news_url, openai_api_key):
         for script in soup(["script", "style"]):
             script.decompose()
         visible_text = soup.get_text(separator='\n', strip=True)
+        print(f"Longueur du texte visible : {len(visible_text)} caractères")  # Affiche la longueur du texte visible
     else:
         print(f"Erreur lors de la requête GET : {response.status_code}")
         return None
-
+    exit()
     url = 'https://api.openai.com/v1/chat/completions'
     headers = {
         'Authorization': f'Bearer {openai_api_key}',
