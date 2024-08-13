@@ -20,10 +20,10 @@ def get_data(url):
         filtered_text = '\n'.join([line for line in visible_text.splitlines() if len(line.strip()) > 30])
 
         text_length = len(filtered_text)
-        print(f"Longueur du texte filtré : {text_length} caractères")
+        print(f"[+] Longueur du texte filtré : {text_length} caractères")
 
         if text_length > 40000:
-            print("Le texte est trop long pour être traité (plus de 40 000 caractères).")
+            print("[-] Le texte est trop long pour être traité (plus de 40 000 caractères).")
             return None
         
         return filtered_text
@@ -32,7 +32,7 @@ def get_data(url):
         print(f"Erreur lors de la requête GET : {e}")
         return None
 
-def ask_gpt(news_url, openai_api_key):
+def ask_gpt_text(news_url, openai_api_key):
     visible_text = get_data(news_url)
     if visible_text == None:
         return None
@@ -94,9 +94,8 @@ def ask_gpt(news_url, openai_api_key):
         response.raise_for_status()
         response_data = response.json()
         chatgpt_message = response_data['choices'][0]['message']['content']
-        time.sleep(20)
         if "Cet article n'est pas suffisamment intéressant pour être publié" in chatgpt_message:
-            print("La nouvelle n'est pas jugée intéressante pour être publiée.")
+            print("[-] La nouvelle n'est pas jugée intéressante pour être publiée.")
             return None
         else:
             return chatgpt_message

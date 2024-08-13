@@ -3,7 +3,8 @@ from linkedin_integration.linkedin_auth import authenticate_linkedin
 from linkedin_integration.linkedin_post import post_to_linkedin
 from rss_feed.rss_parser import get_items_from_url
 from rss_feed.discord_post import post_item_to_discord
-from gpt_integration.gpt_prompt import ask_gpt
+from gpt_integration.gpt_prompt import ask_gpt_text
+from gpt_integration.gpt_image import ask_gpt_image
 import time
 
 def main():
@@ -23,10 +24,13 @@ def main():
                 if current_time - last_checked[url] >= refresh_rate:
                     items = get_items_from_url(url)
                     for item in items:
-                        chatgpt_message = ask_gpt(item['link'], config['OPENAI_API_KEY'])
+                        chatgpt_message = ask_gpt_text(item['link'], config['OPENAI_API_KEY'])
+                        
                         if chatgpt_message:
-                            post_to_linkedin(chatgpt_message, access_token, config['ORG_NAME'])
+                            gpt_image = ask_gpt_image(chatgpt_message, config['OPENAI_API_KEY'])
+                            post_to_linkedin(chatgpt_message, access_token, config['ORG_NAME'], gpt_image)
                             post_item_to_discord(item, title, config['WEBHOOK_URL'])
+                            time.sleep(60)
                         else:
                             print("L'article n'a pas été publié car il n'a pas été jugé intéressant.")
                         time.sleep(2)  # Pause entre les envois pour éviter de dépasser les limites de taux
