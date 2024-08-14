@@ -57,7 +57,7 @@ def post_item_to_discord(item, title, webhook_url):
                               headers=headers,
                               method='POST')
         r = request.urlopen(req)
-        print(f"Message envoyé avec succès à Discord: {r.status} {r.reason}")
+        print(f"[+] Message envoyé avec succès à Discord: {r.status} {r.reason}")
     except HTTPError as e:
         print(f"Erreur HTTP lors de l'envoi à Discord: {e.code} {e.reason}")
     except URLError as e:

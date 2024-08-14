@@ -8,12 +8,14 @@ from datetime import datetime
 HORO_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'horodatage.json')
 
 DATE_FORMATS = [
-    '%a, %d %b %Y %H:%M:%S %z',
-    '%a, %d %b %Y %H:%M:%S GMT',
-    '%a, %d %b %Y %H:%M:%S',
-    '%Y-%m-%dT%H:%M:%SZ',
-    '%Y-%m-%dT%H:%M:%S%z',
+    '%a, %d %b %Y %H:%M:%S %z',   # Année sur 4 chiffres
+    '%a, %d %b %Y %H:%M:%S GMT',  # Année sur 4 chiffres avec GMT
+    '%a, %d %b %Y %H:%M:%S',      # Année sur 4 chiffres sans timezone
+    '%Y-%m-%dT%H:%M:%SZ',         # Format ISO 8601
+    '%Y-%m-%dT%H:%M:%S%z',        # Format ISO 8601 avec timezone
+    '%a, %d %b %y %H:%M:%S %z'    # Année sur 2 chiffres
 ]
+
 
 def parse_pub_date(pub_date_str):
     for date_format in DATE_FORMATS:

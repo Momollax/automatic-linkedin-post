@@ -32,7 +32,7 @@ def main():
                             post_item_to_discord(item, title, config['WEBHOOK_URL'])
                             time.sleep(60)
                         else:
-                            print("L'article n'a pas été publié car il n'a pas été jugé intéressant.")
+                            print("[-]L'article n'a pas été publié car il n'a pas été jugé intéressant.")
                         time.sleep(2)  # Pause entre les envois pour éviter de dépasser les limites de taux
 
                     last_checked[url] = current_time

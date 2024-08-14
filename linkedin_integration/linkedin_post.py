@@ -112,7 +112,7 @@ def post_to_linkedin(message, access_token, org_name, image_path):
     try:
         response = requests.post(post_url, headers=headers, data=json.dumps(payload))
         response.raise_for_status()
-        print("Message posté avec succès sur LinkedIn au nom de l'organisation.")
+        print("[+] Message posté avec succès sur LinkedIn au nom de l'organisation.")
     except requests.exceptions.HTTPError as http_err:
         print(f"Erreur HTTP lors de la publication sur LinkedIn : {http_err}")
         print(f"Code d'état : {http_err.response.status_code}")
